@@ -2,33 +2,36 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-class Square extends React.Component {
-    constructor(args){
-        super(args)
-        this.state={
-            value:''
-        }
-    }
-    clickHandler=()=>{
-        this.setState({
-            value:'X'
-        })
-    }
-    render() {
-        return (
-            <button className="square"
-                onClick={this.clickHandler}>
-                {this.state.value}
-            </button>
-        );
-    }
+function Square(props) {
+    return (
+        <button className="square"
+            onClick={props.onClick}>
+            {props.value}
+        </button>
+    );
 }
 
 class Board extends React.Component {
+    constructor(arg) {
+        super(arg)
+        this.state = { // 初始化状态
+            squareData: [null, null, null, null, null, null, null, null, null],
+        }
+    }
     renderSquare(i) {
-        return <Square index={i}/>;
+        return <Square value={this.state.squareData[i]}
+            onClick={() => this.handleClick(i)} />;
     }
 
+    handleClick(i) {
+        this.setState(prevState => {
+            const squareData = [...prevState.squareData]
+            squareData[i] = 'X'
+            return {
+                squareData,
+            }
+        })
+    }
     render() {
         const status = 'Next player: X';
 
