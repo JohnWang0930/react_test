@@ -5,7 +5,7 @@ import './index.css';
 function Square(props) {
     return (
         <button className="square"
-            onClick={props.onClick}>
+            onClick={() => props.onClick(props.index)}>
             {props.value}
         </button>
     );
@@ -20,7 +20,8 @@ class Board extends React.Component {
     }
     renderSquare(i) {
         return <Square value={this.state.squareData[i]}
-            onClick={() => this.handleClick(i)} />;
+            index={i}
+            onClick={(index) => this.handleClick(index)} />;
     }
 
     handleClick(i) {
