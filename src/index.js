@@ -2,6 +2,28 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+
+function calculateWinner(squares) {
+    const lines = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+    ];
+    for (let i = 0; i < lines.length; i++) {
+        const [a, b, c] = lines[i];
+        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+            return squares[a];
+        }
+    }
+    return null;
+}
+
+
 function Square(props) {
     return (
         <button className="square"
@@ -16,6 +38,7 @@ class Board extends React.Component {
         super(arg)
         this.state = { // 初始化状态
             squareData: [null, null, null, null, null, null, null, null, null],
+            isXsTurn: true,
         }
     }
     renderSquare(i) {
@@ -26,15 +49,26 @@ class Board extends React.Component {
 
     handleClick(i) {
         this.setState(prevState => {
+            if (this.state.squareData[i] || calculateWinner(this.state.squareData)){
+                return
+            }
             const squareData = [...prevState.squareData]
-            squareData[i] = 'X'
+            const isXsTurn = !prevState.isXsTurn
+            squareData[i] = prevState.isXsTurn ? 'X' : 'O'
             return {
                 squareData,
+                isXsTurn,
             }
         })
     }
     render() {
-        const status = 'Next player: X';
+        const winner = calculateWinner(this.state.squareData)
+        let status = ''
+        if (!winner) {
+            status = `Next player:${this.state.isXsTurn ? 'X' : 'O'}`
+        }else{
+            status = `winner is: ${winner}`
+        }
 
         return (
             <div>
