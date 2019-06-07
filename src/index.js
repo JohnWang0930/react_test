@@ -35,7 +35,7 @@ function Square(props) {
 
 class Board extends React.Component {
     renderSquare(i) {
-        return <Square value={this.props.squareData[i]}
+        return <Square key={i} value={this.props.squareData[i]}
             index={i}
             onClick={(index) => this.props.onClick(index)} />;
     }
@@ -90,6 +90,29 @@ class Game extends React.Component {
             }
         })
     }
+
+    handleHistoryClick(index){
+        const squareData = this.state.history[index]
+        const history = this.state.history.slice(0,index)
+        const isXsTurn = index % 2 === 0
+        this.setState({
+            squareData,
+            history,
+            isXsTurn,
+        })
+    }
+    getHistoryButton(){
+        return this.state.history.map((item,index)=>{
+            const desc = index ? `去第${index}步` : '去游戏开始的时候'
+            return (
+                <li key={index}>
+                    <button  onClick={()=>this.handleHistoryClick(index)}>
+                        {desc}
+                    </button>
+                </li>
+            )
+        })
+    }
     render() {
         const winner = calculateWinner(this.state.squareData)
         let status = ''
@@ -98,6 +121,8 @@ class Game extends React.Component {
         } else {
             status = `winner is: ${winner}`
         }
+
+
         return (
             <div className="game">
                 <div className="game-board">
@@ -107,7 +132,7 @@ class Game extends React.Component {
                 </div>
                 <div className="game-info">
                     <div>{status}</div>
-                    <ol>{/* TODO */}</ol>
+                    <ol>{this.getHistoryButton()}</ol>
                 </div>
             </div>
         );
