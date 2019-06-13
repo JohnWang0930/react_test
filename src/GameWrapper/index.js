@@ -1,6 +1,4 @@
 import React from 'react'
-import {Route } from 'react-router-dom'
-import Game from '../Game'
 
 export default class Main extends React.Component {
     constructor(props) {
@@ -15,7 +13,6 @@ export default class Main extends React.Component {
                 <div className="header">
                     {this.state.str}
                 </div>
-                <Route path="/game_wrapper/:id" component={Game} />
             </div>
         )
     }
