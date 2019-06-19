@@ -5,11 +5,13 @@ import 'antd/dist/antd.css'
 import {Switch,Route} from 'react-router-dom'
 import Game from '../Game'
 import Empty from '../Empty'
+import HeaderWrapper from '../HeaderWrapper'
 import styles from './index.module.scss'
 import  './index.scss'
 
 import { Layout } from 'antd';
-const { Header, Footer, Sider, Content } = Layout;
+const { Footer, Sider, Content } = Layout;
+
 
 export default class Main extends React.Component {
     constructor(props) {
@@ -21,7 +23,7 @@ export default class Main extends React.Component {
     render() {
         return (
             <Layout className={styles.layout}>
-                <Header style={{color:'white'}}>大家好，这是头部广告位哈哈哈</Header>
+                <HeaderWrapper></HeaderWrapper>
                 <Layout>
                     <Sider>
                         <SideBar />
