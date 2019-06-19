@@ -1,20 +1,19 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom'
-import Main from './Main'
-import Login from './Login'
-import {observer} from 'mobx-react'
+import Main from './view/Main'
+import Login from './view/Login'
+import { observer } from 'mobx-react'
 
 
-import {userStore} from './store/index'
+import { userStore } from './store/index'
 
-const Index = observer(class Index extends React.Component{
+const Index = observer(class Index extends React.Component {
     userStore = userStore
     render() {
         return (
             <BrowserRouter>
-            {this.userStore.isLogin ? <Main /> : <Login/>}
-                
+                {this.userStore.isLogin ? <Main /> : <Login />}
             </BrowserRouter>
         )
     }
@@ -22,5 +21,5 @@ const Index = observer(class Index extends React.Component{
 
 
 ReactDOM.render((
-    <Index userStore={userStore}></Index>
+    <Index></Index>
 ), document.getElementById('root'))

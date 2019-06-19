@@ -1,0 +1,19 @@
+.wrapper {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 200px;
+    transform: translate(-50%, -50%);
+    &_input,&_title {
+        margin-bottom: 10px;
+    }
+    &_title {
+        display: inline-block;
+        font-size: 18px;
+        font-weight: bolder;
+    }
+}
