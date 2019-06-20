@@ -1,8 +1,9 @@
 import {decorate,observable,computed,action} from 'mobx'
 class UserStore {
     constructor(){
-        this.token  = window.localStorage.getItem('token')
-        this.expire  = window.localStorage.getItem('expire')
+        const token  = window.localStorage.getItem('token')
+        const expire  = window.localStorage.getItem('expire')
+        this.setToken(token,expire)
     }
     token=''
     expire=''
