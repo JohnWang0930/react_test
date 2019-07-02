@@ -36,7 +36,11 @@
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/plugin-transform-react-jsx": "^7.3.0",
+    "babel-plugin-react-css-modules": "^5.2.6",
+    "babel-plugin-transform-class-properties": "^6.24.1"
+  },
   "author": "wzhen0930@163.com",
   "license": "ISC"
 }
